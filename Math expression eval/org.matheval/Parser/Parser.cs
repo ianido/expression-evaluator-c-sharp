@@ -90,7 +90,7 @@ namespace org.matheval
         {
             InitOperators();
             InitConstants();
-            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture);
+            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture, new Dictionary<string, object>());
             Lexer = new Lexer("", this);
         }
 
@@ -102,7 +102,7 @@ namespace org.matheval
         {
             InitOperators();
             InitConstants();
-            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture);
+            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture, new Dictionary<string, object>());
             Lexer = new Lexer(formular, this);
             //Lexer.GetToken();
         }

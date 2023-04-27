@@ -920,6 +920,27 @@ namespace UnitTest
             Expression expr1 = new Expression("ISNUMBER(\"0.23\")");
             Assert.AreEqual(true, expr1.Eval<bool>());
 
+            expr1.SetFomular("ISNUMBER(\"23\")");
+            Assert.AreEqual(true, expr1.Eval<bool>());
+
+            expr1.SetFomular("ISNUMBER(\".23\")");
+            Assert.AreEqual(true, expr1.Eval<bool>());
+
+            expr1.SetFomular("ISNUMBER(\"23.\")");
+            Assert.AreEqual(true, expr1.Eval<bool>());
+
+            expr1.SetFomular("ISNUMBER(\"-23\")");
+            Assert.AreEqual(true, expr1.Eval<bool>());
+
+            expr1.SetFomular("ISNUMBER(\"-.23\")");
+            Assert.AreEqual(true, expr1.Eval<bool>());
+
+            expr1.SetFomular("ISNUMBER(\"-23.\")");
+            Assert.AreEqual(true, expr1.Eval<bool>());
+
+            expr1.SetFomular("ISNUMBER(\".23.\")");
+            Assert.AreEqual(false, expr1.Eval<bool>());
+
             expr1.SetFomular("ISNUMBER(\"0.2a3\")");
             Assert.AreEqual(false, expr1.Eval<bool>());
 
@@ -932,6 +953,28 @@ namespace UnitTest
             expr1.SetFomular("ISNUMBER(null)");
             Assert.AreEqual(false, expr1.Eval<bool>());
 
+        }
+
+        [TestMethod]
+        public void Text_Function_Value_Test()
+        {
+            Expression expr1 = new Expression("VALUE(\"123\")");
+            Assert.AreEqual(123, expr1.Eval<int>());
+
+            expr1.SetFomular("VALUE(\"123.123\")");
+            Assert.AreEqual(123.123m, expr1.Eval<decimal>());
+
+            expr1.SetFomular("VALUE(\".123\")");
+            Assert.AreEqual(0.123m, expr1.Eval<decimal>());
+
+            expr1.SetFomular("VALUE(\"-.123\")");
+            Assert.AreEqual(-0.123m, expr1.Eval<decimal>());
+
+            expr1.SetFomular("VALUE(\"123.\")");
+            Assert.AreEqual(123, expr1.Eval<int>());
+
+            expr1.SetFomular("VALUE(\".123.\")");
+            Assert.ThrowsException<Exception>(() => expr1.Eval<int>());
         }
 
         [TestMethod]
@@ -1216,6 +1259,18 @@ namespace UnitTest
 
                 return string.Join("-", a1, a2, a3);
             }
+        }
+
+
+        [TestMethod]
+        public void Text_Function_Exist_Test()
+        {
+            Expression expr1 = new Expression("EXIST(\"ab\")");
+            Assert.AreEqual(false, expr1.Eval<bool>());
+            expr1.Bind("ab", 1);
+
+            expr1.SetFomular("EXIST(\"ab\")");
+            Assert.AreEqual(true, expr1.Eval<bool>());
         }
     }
 }

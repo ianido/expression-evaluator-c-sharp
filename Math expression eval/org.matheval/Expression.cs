@@ -66,8 +66,8 @@ namespace org.matheval
         /// </summary>
         public Expression()
         {
-            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture);
             VariableParams = new Dictionary<string, object>();
+            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture, VariableParams);
             Parser = new Parser(Dc);
         }
 
@@ -77,8 +77,8 @@ namespace org.matheval
         /// <param name="formular">Input fomular text or math expression string</param>
         public Expression(string formular)
         {
-            Dc = new ExpressionContext(6, MidpointRounding.ToEven,"yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture);
             VariableParams = new Dictionary<string, object>();
+            Dc = new ExpressionContext(6, MidpointRounding.ToEven,"yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture, VariableParams);
             Parser = new Parser(Dc, formular);
         }
 
@@ -88,8 +88,8 @@ namespace org.matheval
         /// <param name="parser">Parser instance</param>
         public Expression(Parser parser)
         {
-            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture);
             VariableParams = new Dictionary<string, object>();
+            Dc = new ExpressionContext(6, MidpointRounding.ToEven, "yyyy-MM-dd", "yyyy-MM-dd HH:mm", @"hh\:mm", CultureInfo.InvariantCulture, VariableParams);
             Parser = parser;
         }
 
@@ -401,6 +401,16 @@ namespace org.matheval
             {
                 Root = null;
             }
+        }
+
+        /// <summary>
+        /// Check for existing params in binding
+        /// </summary>
+        /// <param name="paramName"></param>
+        /// <returns></returns>
+        public bool ExistParam(string paramName)
+        {
+            return VariableParams.ContainsKey(paramName);
         }
 
         /// <summary>

@@ -22,6 +22,7 @@
     THE SOFTWARE.
 */
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace org.matheval
@@ -84,13 +85,18 @@ namespace org.matheval
         public CultureInfo? WorkingCulture;
 
         /// <summary>
+        /// Variable params
+        /// </summary>
+        public readonly Dictionary<string, object> VariableParams;
+
+        /// <summary>
         /// Initializes a new instance structure to a specified type int scale and type MidpointRounding rd
         /// </summary>
         /// <param name="scale"></param>
         /// <param name="rd"></param>
         /// <param name="dateFormat"></param>
         /// <param name="datetimeFormat"></param>
-        public ExpressionContext(int scale, MidpointRounding rd, string dateFormat, string datetimeFormat, string timeFormat, CultureInfo workingCulture)
+        public ExpressionContext(int scale, MidpointRounding rd, string dateFormat, string datetimeFormat, string timeFormat, CultureInfo workingCulture, Dictionary<string, object> variableParams)
         {
             Scale = scale;
             Rd = rd;
@@ -99,6 +105,7 @@ namespace org.matheval
             TimeFormat = timeFormat;
             DateSystem = new DateTime(1899, 12, 30);
             WorkingCulture = workingCulture;
+            VariableParams = variableParams;
         }
     }
 }

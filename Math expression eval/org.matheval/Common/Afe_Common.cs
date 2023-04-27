@@ -401,6 +401,11 @@ namespace org.matheval.Common
         public const string Const_Value = "value";
 
         /// <summary>
+        /// Function Exist
+        /// </summary>
+        public const string Const_Exist = "exist";
+
+        /// <summary>
         /// Function Bool
         /// </summary>
         public const string Const_Bool = "bool";

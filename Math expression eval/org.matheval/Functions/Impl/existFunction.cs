@@ -22,18 +22,17 @@
     THE SOFTWARE.
 */
 using org.matheval.Common;
+
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace org.matheval.Functions
 {
     /// <summary>
-    /// Check if a value is a number.
-    /// ISNUMBER("0.23") -> true
-    /// ISNUMBER("abc") -> false
+    /// Check if param exist in the Binder
+    /// EXIST("paramName") -> true/false
     /// </summary>
-    public class isnumberFunction : IFunction
+    public class existFunction : IFunction
     {
         /// <summary>
         /// Get Information
@@ -41,7 +40,7 @@ namespace org.matheval.Functions
         /// <returns>FunctionDefs</returns>
         public List<FunctionDef> GetInfo()
         {
-            return new List<FunctionDef> { new FunctionDef(Afe_Common.Const_Isnumber, new System.Type[] { typeof(object) }, typeof(bool), 1) };
+            return new List<FunctionDef> { new FunctionDef(Afe_Common.Const_Exist, new System.Type[] { typeof(string) }, typeof(bool), 1) };
         }
 
         /// <summary>
@@ -52,7 +51,8 @@ namespace org.matheval.Functions
         /// <returns>Value</returns>
         public object? Execute(Dictionary<string, object?> args, ExpressionContext dc)
         {
-            return decimal.TryParse(Afe_Common.ToString(args[Afe_Common.Const_Key_One], dc.WorkingCulture), out _);
+            var param1 = Afe_Common.ToString(args[Afe_Common.Const_Key_One], dc.WorkingCulture);
+            return dc.VariableParams.ContainsKey(param1);            
         }
     }
 }
