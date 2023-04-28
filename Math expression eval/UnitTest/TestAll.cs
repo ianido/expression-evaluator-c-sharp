@@ -1272,5 +1272,24 @@ namespace UnitTest
             expr1.SetFomular("EXIST(\"ab\")");
             Assert.AreEqual(true, expr1.Eval<bool>());
         }
+
+        [TestMethod]
+        public void Text_Function_Exist_IfTest()
+        {
+            Expression expr1 = new Expression("IF(EXIST(\"Ab\"),1,2)");
+            Assert.AreEqual(2, expr1.Eval<int>());
+            expr1.Bind("Ab", 1);
+            Assert.AreEqual(1, expr1.Eval<int>());
+        }
+
+        [TestMethod]
+        public void Text_Function_Exist_If_SelfTest()
+        {
+            Expression expr1 = new Expression("IF(EXIST(\"Ab\"),Ab,2)");
+            Assert.AreEqual(2, expr1.Eval<int>());
+            expr1.Bind("Ab", 1);
+            Assert.AreEqual(1, expr1.Eval<int>());
+        }
+
     }
 }

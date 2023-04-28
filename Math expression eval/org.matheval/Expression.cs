@@ -410,7 +410,8 @@ namespace org.matheval
         /// <returns></returns>
         public bool ExistParam(string paramName)
         {
-            return VariableParams.ContainsKey(paramName);
+            if (paramName == null) return false;
+            return VariableParams.ContainsKey(paramName.ToLowerInvariant());
         }
 
         /// <summary>

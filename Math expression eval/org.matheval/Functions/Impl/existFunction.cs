@@ -51,7 +51,7 @@ namespace org.matheval.Functions
         /// <returns>Value</returns>
         public object? Execute(Dictionary<string, object?> args, ExpressionContext dc)
         {
-            var param1 = Afe_Common.ToString(args[Afe_Common.Const_Key_One], dc.WorkingCulture);
+            var param1 = Afe_Common.ToString(args[Afe_Common.Const_Key_One], dc.WorkingCulture).ToLowerInvariant();
             return dc.VariableParams.ContainsKey(param1);            
         }
     }
