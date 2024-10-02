@@ -1,0 +1,1 @@
+﻿dotnet nuget push MongoDB.Data.Infrastructure.2.6.0.nupkg --interactive --source AvivaLab -k <PAT Token>
